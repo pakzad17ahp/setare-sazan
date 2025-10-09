@@ -1,9 +1,26 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { AppController } from './modules/app/app.controller';
+import { AppService } from './modules/app/app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { allConfigs } from './configs/all-configs';
+import { ConfigModule } from '@nestjs/config';
+import { validateConfigs } from './configs/services/validate-configs';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({
+      validate: validateConfigs,
+      isGlobal: true,
+      envFilePath: ['.env'],
+      load: [allConfigs],
+    }),
+    TypeOrmModule.forRoot({
+      url : allConfigs().database.postgres.url,
+      ...allConfigs().database.postgres.typeOrmOptions,
+      type: 'postgres',
+      subscribers : []
+    })
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
