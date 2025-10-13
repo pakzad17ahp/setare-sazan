@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { allConfigs } from './configs/all-configs';
 import { ConfigModule } from '@nestjs/config';
 import { validateConfigs } from './configs/services/validate-configs';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { validateConfigs } from './configs/services/validate-configs';
       ...allConfigs().database.postgres.typeOrmOptions,
       type: 'postgres',
       subscribers : []
-    })
+    }),
+    UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
