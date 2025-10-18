@@ -29,6 +29,11 @@ export class UserEntityRepository
       : this;
   }
 
+  async create(input: CreateUserType): Promise<User> {
+    const object = await this.userRepository.save(input);
+    return new User(object);
+  }
+
   async findOne(
     where: FindOptionsWhere<User>,
     relations?: FindOptionsRelations<User>,
@@ -45,11 +50,6 @@ export class UserEntityRepository
   ): Promise<User[]> {
     const objects = await this.userRepository.find({ where, select, relations });
     return User.constructMany(objects);
-  }
-
-  async create(input: CreateUserType): Promise<User> {
-    const object = await this.userRepository.save(input);
-    return new User(object);
   }
 
   async updateOne(

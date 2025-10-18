@@ -4,9 +4,9 @@ import { MaybeType } from '../../common/types/maybe.type';
 
 export abstract class BaseModel implements BaseModelInterface {
   id: string;
-  createdAt: Date;
-  deletedAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  deletedAt?: Date;
+  updatedAt?: Date;
 
   protected constructor(entity?: BaseModelEntity) {
     if (entity) {

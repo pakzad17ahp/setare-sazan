@@ -2,10 +2,10 @@ import { BaseModelInterface } from '../../../../base/interfaces/base-model.inter
 import { UserRoleEnum } from '../../application/enums/user-role.enum';
 
 export interface UserInterface extends BaseModelInterface {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   phoneNumber: string;
-  userName: string;
-  password: string;
+  password?: string;
   role: UserRoleEnum;
+  isPhoneVerified: boolean;
 }

@@ -5,12 +5,12 @@ import { UserEntity } from '../../infrastructure/entities/user.entity';
 import { MaybeType } from '../../../../common/types/maybe.type';
 
 export class User extends BaseModel implements UserInterface {
-  firstName: string;
-  lastName: string;
+  firstName?: string;
+  lastName?: string;
   phoneNumber: string;
-  userName: string;
-  password: string;
+  password?: string;
   role: UserRoleEnum;
+  isPhoneVerified: boolean;
 
   constructor(entity: UserEntity) {
     super(entity);
@@ -18,9 +18,9 @@ export class User extends BaseModel implements UserInterface {
       this.firstName = entity.firstName;
       this.lastName = entity.lastName;
       this.phoneNumber = entity.phoneNumber;
-      this.userName = entity.userName;
       this.password = entity.password;
       this.role = entity.role;
+      this.isPhoneVerified = entity.isPhoneVerified;
     }
   }
   static constructMany(entities: UserEntity[]): User[] {
